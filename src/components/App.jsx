@@ -19,15 +19,13 @@ export class App extends Component {
   }
   componentDidMount() {
     const initialContacts = JSON.parse(localStorage.getItem('contacts'));
-    this.setState({ contacts: initialContacts });
+    initialContacts && this.setState({ contacts: initialContacts });
   }
 
   createContact = newItem => {
-    const isInContacts = this.state.contacts
-      ? this.state.contacts.some(
-          contact => contact.name.toLowerCase() === newItem.name.toLowerCase()
-        )
-      : false;
+    const isInContacts = this.state.contacts.some(
+      contact => contact.name.toLowerCase() === newItem.name.toLowerCase()
+    );
     if (isInContacts) {
       alert(`${newItem.name} is already in contacts.`);
       return;
@@ -45,11 +43,8 @@ export class App extends Component {
   };
 
   createFilteredList = () => {
-    return (
-      this.state.contacts &&
-      this.state.contacts.filter(contact =>
-        contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
-      )
+    return this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
   };
   deleteContact = e => {
@@ -79,7 +74,7 @@ export class App extends Component {
         <h3>Phonebook</h3>
         <ContactForm createContact={this.createContact} />
         <h3>Contacts</h3>
-        {this.state.contacts?.length > 0 ? (
+        {this.state.contacts.length > 0 ? (
           <>
             <Filter onFindInput={this.onFindInput} />
             <ContactList
