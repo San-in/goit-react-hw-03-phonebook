@@ -77,7 +77,7 @@ export class App extends Component {
         <h3>Phonebook</h3>
         <ContactForm createContact={this.createContact} />
         <h3>Contacts</h3>
-        {this.state.contacts.length > 0 ? (
+        {this.state.contacts?.length > 0 ? (
           <>
             <Filter onFindInput={this.onFindInput} />
             <ContactList
