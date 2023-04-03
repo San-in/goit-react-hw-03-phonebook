@@ -23,9 +23,11 @@ export class App extends Component {
   }
 
   createContact = newItem => {
-    const isInContacts = this.state.contacts.some(
-      contact => contact.name.toLowerCase() === newItem.name.toLowerCase()
-    );
+    const isInContacts = this.state.contacts
+      ? this.state.contacts.some(
+          contact => contact.name.toLowerCase() === newItem.name.toLowerCase()
+        )
+      : false;
     if (isInContacts) {
       alert(`${newItem.name} is already in contacts.`);
       return;
