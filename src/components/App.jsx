@@ -43,8 +43,11 @@ export class App extends Component {
   };
 
   createFilteredList = () => {
-    return this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    return (
+      this.state.contacts &&
+      this.state.contacts.filter(contact =>
+        contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+      )
     );
   };
   deleteContact = e => {
